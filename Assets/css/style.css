@@ -19,7 +19,7 @@ h1 {
     color: white;
 }
 
-#Display {
+#Wins {
     color: black;
     background-color: white;
     text-align: center;
@@ -40,7 +40,7 @@ h1 {
     width: 50%;
 }
 
-#Letter {
+#Letter,  #Loses, #Tries {
     color: black;
     background-color: white;
     text-align: center;

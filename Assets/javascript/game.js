@@ -22,6 +22,7 @@
 
     // Print Word
     function Print() {
+        document.getElementById("Word").innerHTML = "";
         var Div = document.createElement("div");
         for (var i = 0; i < Guess.length; i++) {
             var Hidden = [];
@@ -65,6 +66,7 @@
     function Complete() {
         if (NewWord.length === arr.length) {
             Correct = true;
+            Group();
             WFunction();  
         } 
         else {
@@ -79,7 +81,8 @@
         Correct = false;
         NewWord = [];
         Guess = Words[Math.floor(Math.random()*Words.length)];
-        Display();
+        document.getElementById("Tries").innerHTML = ("Tries = " + Tries);
+        document.getElementById("Letter").innerHTML = ("Guessed Letters = [" + GuessedLetter + "]");
         Print();
     } 
 
@@ -87,6 +90,7 @@
     function WFunction() {
         Wins++;
         alert("You Win!");
+        document.getElementById("Wins").innerHTML = ("Wins = " + Wins);
         Reset();        
     }
 
@@ -94,6 +98,7 @@
     function LFunction() {
         Loses++;
         alert("You Lose!");
+        document.getElementById("Loses").innerHTML = ("Loses = " + Loses);
         Reset();
     }
 
@@ -101,14 +106,17 @@
     function Try() {
         if (GuessedLetter.indexOf(Letter) === -1) {
         Tries--;
+        document.getElementById("Tries").innerHTML = ("Tries = " + Tries);
         console.log("Tries = " + Tries);
         }
     }
 
     // Guessed Letters
     function Group() {
+        var Div = document.createElement("div");
         if (GuessedLetter.indexOf(Letter) === -1) {
             GuessedLetter.push(Letter);
+            document.getElementById("Letter").innerHTML = ("Guessed Letters = [" + GuessedLetter + "]");
             console.log("Guessed Letters = [" + GuessedLetter + "]");
         } else if (GuessedLetter.indexOf(Letter) > -1) {
             console.log("Guessed Letters = [" + GuessedLetter + "]");
@@ -119,23 +127,31 @@
     function New() {
             if (arr.indexOf(Letter) === -1) {
                 console.log("_ ");
+                document.getElementById("Word").innerHTML = ("_ ");
             } // If
             else if (arr.indexOf(Letter) > -1) {
                 console.log(Letter);
+                arr.indexOf(Letter) == Letter;
+                document.getElementById("Word").innerHTML = arr;
             } // Else
-        Display();
     }
 
     // Main
     function Display() {
-        var Div = document.createElement("div");
-        var Test = [];
-        // var Stats = ["Wins = " + Wins, "Loses = " + Loses, "Tries = " + Tries];
-        for (var i = 0; i < 3; i++) {
-            Test[i] = document.createTextNode(Stats[i]);
-            Div.appendChild(Test[i]);
-            document.getElementById("Display").appendChild(Div);
-        }
+        var Div1 = document.createElement("div");
+        var Div2 = document.createElement("div");
+        var Div3 = document.createElement("div");
+        var TWins = document.createTextNode(Stats[0]);
+        Div1.appendChild(TWins);
+        document.getElementById("Wins").appendChild(Div1);
+
+        var TLoses = document.createTextNode(Stats[1]);
+        Div2.appendChild(TLoses);
+        document.getElementById("Loses").appendChild(Div2);
+
+        var TTries = document.createTextNode(Stats[2]);
+        Div3.appendChild(TTries);
+        document.getElementById("Tries").appendChild(Div3);
         console.log("Wins = " + Wins);
         console.log("Loses = " + Loses);
         console.log("Tries = " + Tries);
